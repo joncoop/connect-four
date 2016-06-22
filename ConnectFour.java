@@ -28,9 +28,9 @@ public class ConnectFour {
 	}
 	
 	public int getMove() {
-		int displayPlayerNum = turn + 1;
-		System.out.println("Player " + displayPlayerNum + ", Enter column to drop: ");
+		System.out.println("Player " + (turn + 1) + ", Enter column to drop: ");
 		int col = input.nextInt();
+		
 		return col;
 	}
 	
@@ -55,8 +55,8 @@ public class ConnectFour {
 	public boolean checkWin(int[] loc) {		
 		int upperLeftRow = Math.max(loc[0] - 3, 0);
 		int upperLeftCol = Math.max(loc[1] - 3, 0);
-		int lowerRightRow = Math.min(loc[0] + 4, 7);
-		int lowerRightCol = Math.min(loc[1] + 4, 7);
+		int lowerRightRow = Math.min(loc[0] + 3, 7);
+		int lowerRightCol = Math.min(loc[1] + 3, 7);
 		
 		int hSum = 0;
 		int vSum = 0;
@@ -106,7 +106,7 @@ public class ConnectFour {
 			
 			if (over) {
 				drawGrid();
-				System.out.println("Player " + (turn +1) + " wins!");
+				System.out.println("Player " + (turn + 1) + " wins!");
 			}
 			else {
 				advanceTurn();
