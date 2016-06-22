@@ -15,7 +15,7 @@ public class ConnectFour {
 				if (val == 1) {
 					System.out.print("X");
 				}
-				else if (val == 2) {
+				else if (val == 5) {
 					System.out.print("O");
 				}
 				else {
@@ -34,27 +34,34 @@ public class ConnectFour {
 		return col;
 	}
 	
-	public void dropChip(int col) {		
+	public int[] dropChip(int col) {		
 		int row = grid.length - 1;
 				
 		while (grid[row][col] > 0) {
 			row--;
 		}
 	
-		grid[row][col] = turn + 1;
+		if (turn == 0) {
+			grid[row][col] = 1;
+		}
+		else {
+			grid[row][col] = 5;
+		}
+		
+		int[] loc = {row, col};
+		return loc;
 	}
 	
-	public void checkWin() {
-		for (int r=0; r<grid.length - 3; r++) {
-			for (int c=0; c<grid[r].length - 3; c++) {
-				int val = grid[r][c];
-				
-				// this isn't going to work
-				int hSum = grid[r][c] +grid[r][c+1] +grid[r][c+2] +grid[r][c+3];
-				int vSum = grid[r][c] +grid[r+1][c] +grid[r+2][c] +grid[r+3][c];
-				
-			}
-		}
+	public boolean checkWin(int[] loc) {		
+		int upperLeftRow = Math.max(loc[0] - 3, 0);
+		int upperLeftCol = Math.max(loc[1] - 3, 0);
+		int lowerRightRow = Math.min(loc[0] + 4, 7);
+		int lowerRightCol = Math.min(loc[1] + 4, 7);
+		
+
+		
+		
+		return false;
 	}
 	
 	public void advanceTurn() {
@@ -65,7 +72,9 @@ public class ConnectFour {
 		while (!over) {
 			drawGrid();
 			int col = getMove();
-			dropChip(col);
+			int[] loc = dropChip(col);
+			
+			over = checkWin(loc);
 			advanceTurn();
 			
 			System.out.println();
