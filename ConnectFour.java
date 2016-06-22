@@ -58,8 +58,27 @@ public class ConnectFour {
 		int lowerRightRow = Math.min(loc[0] + 4, 7);
 		int lowerRightCol = Math.min(loc[1] + 4, 7);
 		
-
+		int hSum = 0;
+		int vSum = 0;
+		int dSum1 = 0;
+		int dSum2 = 0;
 		
+		for (int row = upperLeftRow; row <= lowerRightRow; row++) {
+			for (int col = upperLeftCol; col <= lowerRightCol; col++) {
+				
+				if (col <= 4) {
+					hSum = grid[row][col] + grid[row][col+1] + grid[row][col+2] + grid[row][col+3];
+				}
+				
+				if (row <= 4) {
+					vSum = grid[row][col] + grid[row+1][col] + grid[row+2][col] + grid[row+3][col];
+				}
+				
+				if (hSum == 4 || hSum == 20 || vSum == 4 || vSum == 20) {
+					return true;
+				}
+			}
+		}
 		
 		return false;
 	}
@@ -75,7 +94,14 @@ public class ConnectFour {
 			int[] loc = dropChip(col);
 			
 			over = checkWin(loc);
-			advanceTurn();
+			
+			if (over) {
+				drawGrid();
+				System.out.println("Player " + (turn +1) + " wins!");
+			}
+			else {
+				advanceTurn();
+			}
 			
 			System.out.println();
 		}
@@ -86,6 +112,8 @@ public class ConnectFour {
 		
 		ConnectFour game = new ConnectFour();
 		game.play();
+		
+		System.out.println("done");
 		
 	}
 }
