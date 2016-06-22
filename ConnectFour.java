@@ -74,7 +74,16 @@ public class ConnectFour {
 					vSum = grid[row][col] + grid[row+1][col] + grid[row+2][col] + grid[row+3][col];
 				}
 				
-				if (hSum == 4 || hSum == 20 || vSum == 4 || vSum == 20) {
+				if (row <= 4 && col <= 4) {
+					dSum1 = grid[row][col] + grid[row+1][col+1] + grid[row+2][col+2] + grid[row+3][col+3];
+				}
+				
+				if (row >= 4 && col <= 4) {
+					dSum2 = grid[row][col] + grid[row-1][col+1] + grid[row-2][col+2] + grid[row-3][col+3];
+				}
+				
+				if (hSum == 4 || hSum == 20 || vSum == 4 || vSum == 20 || 
+				    dSum1 == 4 || dSum1 == 20 || dSum2 == 4 || dSum2 == 20) {
 					return true;
 				}
 			}
