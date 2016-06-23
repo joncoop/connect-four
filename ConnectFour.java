@@ -7,6 +7,18 @@ public class ConnectFour {
 	int turn = 0;
 	boolean over = false;
 	
+	public void drawStartScreen() {
+		System.out.println("***************************************");
+		System.out.println("*                                     *");
+		System.out.println("*            CONNECT FOUR!            *");
+		System.out.println("*                                     *");
+		System.out.println("*          Player 1 drops Xs          *");
+		System.out.println("*          Player 2 drops Os          *");
+		System.out.println("*                                     *");
+		System.out.println("***************************************");
+		System.out.println();
+	}
+	
 	public void drawGrid() {
 		for (int r=0; r<grid.length; r++) {
 			for (int c=0; c<grid[r].length; c++) {
@@ -21,17 +33,19 @@ public class ConnectFour {
 				else {
 					System.out.print("-");
 				}
+				System.out.print(" ");
 			}
 			System.out.println();
 		}
 		
+		System.out.println("1 2 3 4 5 6 7 8");
+		System.out.println();
 	}
 	
 	public int getMove() {
-		System.out.println("Player " + (turn + 1) + ", Enter column to drop: ");
+		System.out.print("Player " + (turn + 1) + ", Enter column to drop: ");
 		int col = input.nextInt();
-		
-		return col;
+		return col - 1;
 	}
 	
 	public int[] dropChip(int col) {		
@@ -97,6 +111,8 @@ public class ConnectFour {
 	}
 	
 	public void play() {
+		drawStartScreen();
+		
 		while (!over) {
 			drawGrid();
 			int col = getMove();
@@ -118,11 +134,7 @@ public class ConnectFour {
 	}
 	
 	public static void main(String[] args) {
-		
 		ConnectFour game = new ConnectFour();
-		game.play();
-		
-		System.out.println("done");
-		
+		game.play();	
 	}
 }
